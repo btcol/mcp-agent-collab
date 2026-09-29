@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mcp-agent-collab"
+version = "1.0.0"
+description = "Universal MCP server for autonomous multi-agent collaboration with Markdown channels and lock coordination."
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+    { name = "TecnoFlash AI Team" }
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+[project.scripts]
+mcp-agent-collab = "server:main"
+mcp-agent-collab-watcher = "watcher:main"

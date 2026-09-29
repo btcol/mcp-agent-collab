@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "agent-collab": {
+      "command": "python3",
+      "args": [
+        "/home/btcol/Projects/technoplash/mcp-agent-collab/server.py",
+        "--channels-dir",
+        "/home/btcol/Projects/technoplash/mcp-agent-collab/channels"
+      ],
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    }
+  }
+}

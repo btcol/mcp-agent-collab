@@ -1,0 +1,27 @@
+{
+  "version": "1.0.0",
+  "activeAgents": {
+    "agente1": {
+      "name": "Antigravity",
+      "role": "Frontend & UI Architect",
+      "channel": "agente1.md",
+      "registeredAt": "2026-09-29T10:00:00Z",
+      "lastHeartbeat": "2026-09-29T14:35:00Z"
+    },
+    "agente2": {
+      "name": "btcol",
+      "role": "Backend & Database Architect",
+      "channel": "agente2.md",
+      "registeredAt": "2026-09-29T10:15:00Z",
+      "lastHeartbeat": "2026-09-29T14:50:00Z"
+    }
+  },
+  "locks": {
+    "STOREFRONT_DYNAMIC_CATEGORIES": {
+      "owner": "agente2",
+      "acquiredAt": "2026-09-29T14:50:00Z",
+      "reason": "Etapa1: categorías dinámicas sin fallback estático en storefront"
+    }
+  },
+  "inboxQueue": {}
+}
