@@ -36,6 +36,24 @@ Servidor MCP universal (Model Context Protocol) sobre `stdio` en Python para hab
 
 ---
 
+## 📜 Protocolo de Colaboración Multi-Agente (Instrucciones para Agentes)
+
+Puedes copiar y pegar este bloque en el prompt de sistema del agente o en su archivo `AGENT.md` / `CLAUDE.md`:
+
+```markdown
+Protocolo de Colaboración Multi-Agente: Tienes a tu disposición las herramientas MCP de agent-collab para coordinarte con los otros agentes que trabajan en este u otros repositorios:
+
+1- Al iniciar una tarea: Ejecuta collab_register(agent_name="<TuNombre>", role="<TuRol>", repo_name="<NombreDelRepo>"). El servidor te asignará un ID (ej: agente2).
+2- Para ver quién está conectado y qué recursos están tomados: Ejecuta collab_get_status().
+3- Antes de modificar un archivo o migración crítica: Ejecuta collab_acquire_lock(agent_id="<TuID>", resource_name="<archivo_o_tabla>", reason="...", ttl_minutes=15) para evitar que otro agente lo modifique al mismo tiempo.
+4- Para revisar mensajes pendientes o avances de tus compañeros: Ejecuta collab_read_inbox(agent_id="<TuID>").
+5- Para notificar avances o pedir confirmaciones: Ejecuta collab_leave_note(from_agent="<TuID>", to_agent="<agenteReceptor_o_all>", status="WIP|DONE|REQ", module="...", message="...").
+6- Si necesitas interfaces de otro repo: Consulta con collab_inspect_contracts() o publica las tuyas con collab_publish_contract().
+7- Al terminar tu trabajo o cerrar la sesión: Ejecuta siempre collab_unregister(agent_id="<TuID>", reason="Tarea finalizada") para liberar automáticamente todos tus locks.
+```
+
+---
+
 ## 🚀 Cómo Configurar en Clientes MCP
 
 ### 1. En Antigravity IDE / Gemini Agent (`mcp_config.json`):
@@ -43,9 +61,8 @@ Servidor MCP universal (Model Context Protocol) sobre `stdio` en Python para hab
 {
   "mcpServers": {
     "agent-collab": {
-      "command": "python3",
+      "command": "/home/btcol/.local/bin/mcp-agent-collab",
       "args": [
-        "/home/btcol/Projects/technoplash/mcp-agent-collab/server.py",
         "--channels-dir",
         "/home/btcol/Projects/technoplash/mcp-agent-collab/channels"
       ]
@@ -54,8 +71,45 @@ Servidor MCP universal (Model Context Protocol) sobre `stdio` en Python para hab
 }
 ```
 
-### 2. En Claude Code / Cursor / Cline:
-Añade la misma definición a tu archivo de configuración de MCP habitual.
+### 2. En Codex CLI:
+```bash
+codex mcp add agent-collab -- /home/btcol/.local/bin/mcp-agent-collab --channels-dir /home/btcol/Projects/technoplash/mcp-agent-collab/channels
+```
+
+### 3. En Zed Editor (`~/.config/zed/settings.json`):
+```json
+{
+  "context_servers": {
+    "agent-collab": {
+      "command": "/home/btcol/.local/bin/mcp-agent-collab",
+      "args": [
+        "--channels-dir",
+        "/home/btcol/Projects/technoplash/mcp-agent-collab/channels"
+      ]
+    }
+  }
+}
+```
+
+### 4. En Claude Code (CLI):
+```bash
+claude mcp add -s user agent-collab -- /home/btcol/.local/bin/mcp-agent-collab --channels-dir /home/btcol/Projects/technoplash/mcp-agent-collab/channels
+```
+
+### 5. En Cursor (`~/.cursor/mcp.json` o Settings -> MCP):
+```json
+{
+  "mcpServers": {
+    "agent-collab": {
+      "command": "/home/btcol/.local/bin/mcp-agent-collab",
+      "args": [
+        "--channels-dir",
+        "/home/btcol/Projects/technoplash/mcp-agent-collab/channels"
+      ]
+    }
+  }
+}
+```
 
 ---
 
